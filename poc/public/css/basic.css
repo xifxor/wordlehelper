@@ -129,3 +129,9 @@
 
 
     }
+
+    #wordslist{
+        height:600px;
+        overflow-y: scroll;
+
+    }
