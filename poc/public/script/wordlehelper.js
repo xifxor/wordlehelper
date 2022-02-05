@@ -7,15 +7,63 @@ $(document).ready(function(){
     //global vars
     let strSelectedTileID = null;
     let strDictionaryPath = 'dics/english_5_letter.txt';
+    //var strDictionaryPath = 'dics/espanol_5_letters.txt';
 
     //load dictionary
-    let arrDictionaryWords = new Array();
+    var arrDictionaryWords = new Array();
     $.get(strDictionaryPath, function(data){
       arrDictionaryWords = data.split('\n').map(function(w){
           return w.replace(/(\r\n|\n|\r)/gm, "");
         });
       console.log("Loaded dictionary from " + strDictionaryPath);
       console.log("Words loaded: " + arrDictionaryWords.length);
+    });
+
+
+
+    //change dictionary
+    $('#languageselect').change(function(){
+        switch( $(this).val() )
+        {
+          case 'english':
+            strNewDictionaryPath = 'dics/english_5_letter.txt';
+            break;
+          case 'spanish':
+            strNewDictionaryPath = 'dics/espanol_5_letters.txt';
+            break;
+          default:
+            strNewDictionaryPath = 'dics/english_5_letter.txt';
+        }
+
+        //if dictionary has changed then load dictionary and reset page
+        //** load dictionary function should be combined with the default one
+        console.log("existing dictionary " + strDictionaryPath)
+        console.log("new dictionary " + strNewDictionaryPath)
+
+        if (strNewDictionaryPath != strDictionaryPath)
+        {
+          //load the new dictionray
+          console.log("Loading dictionary "+ strNewDictionaryPath)
+          strDictionaryPath = strNewDictionaryPath;
+          var arrDictionaryWords = new Array(); //reset words
+          $.get(strDictionaryPath, function(data){
+            arrDictionaryWords = data.split('\n').map(function(w){
+                return w.replace(/(\r\n|\n|\r)/gm, "");
+              });
+            console.log("Loaded dictionary from " + strDictionaryPath);
+            console.log("Words loaded: " + arrDictionaryWords.length);
+          });
+
+          //reset tiles
+          $('.tile').removeClass().addClass('tile tile_empty');
+          $('#input_notpresent').val("");
+          $('#status').html("Dictionary loaded");
+          $('#wordslist').html("");
+
+        }else{
+          //no change to dictionary
+        }
+
     });
 
     //key up on the "letters that are not present" box
@@ -131,6 +179,8 @@ $(document).ready(function(){
 
 
         //exclude words that dont contain all of arrPresentLetters
+        // *** this function should take into accoun the position of the
+        // right letter-wrong place letters  Currently it does not
         if (arrPresentLetters.length > 0)
         {
           console.log("Filtering for present letters")
