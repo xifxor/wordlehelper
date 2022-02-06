@@ -9,17 +9,39 @@ $(document).ready(function(){
     let strDictionaryPath = 'dics/english_5_letter.txt';
     //var strDictionaryPath = 'dics/espanol_5_letters.txt';
 
-    //load dictionary
-    var arrDictionaryWords = new Array();
-    $.get(strDictionaryPath, function(data){
-      arrDictionaryWords = data.split('\n').map(function(w){
-          return w.replace(/(\r\n|\n|\r)/gm, "");
+    //create dictionary
+    var dictionary = {
+      dicpath :  null,
+      words : [],
+      load : function(newPath){
+
+        this.dicpath = newPath;
+
+        var trReturn = "";
+
+        $.ajax({
+          url: this.dicpath ,
+          success: function(html) {
+            strReturn = html;
+          },
+          async:false
         });
-      console.log("Loaded dictionary from " + strDictionaryPath);
-      console.log("Words loaded: " + arrDictionaryWords.length);
-    });
+
+        this.words = strReturn.split('\n').map(function(w){
+            return w.replace(/(\r\n|\n|\r)/gm, "");
+          });
+
+        console.log("Loaded diction from : " + this.dicpath);
+        console.log("Loaded words: " + this.words.length);
 
 
+      }
+    };
+
+    //load default dictionary
+    dictionary.load(strDictionaryPath);
+    //console.log("Dictionary path: " + dictionary.dicpath);
+    //console.log("Dictionary word count: " + dictionary.words.length);
 
     //change dictionary
     $('#languageselect').change(function(){
@@ -36,25 +58,16 @@ $(document).ready(function(){
         }
 
         //if dictionary has changed then load dictionary and reset page
-        //** load dictionary function should be combined with the default one
         console.log("existing dictionary " + strDictionaryPath)
         console.log("new dictionary " + strNewDictionaryPath)
 
-        if (strNewDictionaryPath != strDictionaryPath)
+        if (strNewDictionaryPath != dictionary.dicpath)
         {
           //load the new dictionray
-          console.log("Loading dictionary "+ strNewDictionaryPath)
-          strDictionaryPath = strNewDictionaryPath;
-          var arrDictionaryWords = new Array(); //reset words
-          $.get(strDictionaryPath, function(data){
-            arrDictionaryWords = data.split('\n').map(function(w){
-                return w.replace(/(\r\n|\n|\r)/gm, "");
-              });
-            console.log("Loaded dictionary from " + strDictionaryPath);
-            console.log("Words loaded: " + arrDictionaryWords.length);
-          });
+          dictionary.load(strNewDictionaryPath);
 
           //reset tiles
+          $('.tile').html("");
           $('.tile').removeClass().addClass('tile tile_empty');
           $('#input_notpresent').val("");
           $('#status').html("Dictionary loaded");
@@ -174,7 +187,9 @@ $(document).ready(function(){
 
 
         //search word dictionary
-        arrFilteredWords = arrDictionaryWords.map((x) => x); //clone the dictioinary
+        console.log("Copying master dictionary")
+        console.log("master ditionary words: " + dictionary.words.length)
+        arrFilteredWords = dictionary.words.map((x) => x); //clone the current dictioinary
         console.log("arrFilteredWords count:" + arrFilteredWords.length);
 
 
