@@ -1,4 +1,3 @@
 node_modules
-poc/dist
 worker
-poc/workers-site
+

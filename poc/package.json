@@ -1,7 +1,7 @@
 {
-  "name": "pickadate",
+  "name": "Wordle Helper",
   "version": "1.0.0",
-  "description": "Tool to pick a date when everyone is available.",
+  "description": "Get some help with those tricky wordle puzzles.",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon ./server.js",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.2.0",
     "express": "^4.17.1",
     "path": "^0.12.7"
   },
