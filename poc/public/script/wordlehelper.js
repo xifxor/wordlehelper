@@ -17,7 +17,7 @@ $(document).ready(function(){
 
         this.dicpath = newPath;
 
-        var trReturn = "";
+        var strReturn = "";
 
         $.ajax({
           url: this.dicpath ,
