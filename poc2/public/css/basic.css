@@ -1,0 +1,107 @@
+
+
+
+
+
+    /* Global Styles & Colors */
+    :root {
+      --color-background: #ffffff;
+      --color-absent: #787c7e;
+      --color-present: #c9b458;
+      --color-absent: #787c7e;
+      --color-correct: #6aaa64;
+      --color-empty: #ffffff;
+      --color-empty-border: #d3d6da;
+      --color-selected-border: #aaaaaa;
+    }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        height: 100%;
+        background-color: var(--color-background);
+        margin: 0;
+        padding: 0;
+        /* Prevent scrollbar appearing on page transition */
+        overflow-y: hidden;
+      }
+
+
+
+    #container {
+      display: grid;
+      grid: repeat(6, 62px) / auto-flow 62px;
+      grid-gap: 5px;
+      margin-top:10px;
+      margin-left:10px;
+
+      font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+
+
+    }
+
+
+    .tile {
+        display: inline-flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        text-align: center;
+        box-sizing: border-box;
+
+
+        height:62px;
+        width:62px;
+
+
+        font-weight:bold;
+        font-size: 2rem;
+        line-height: 2rem;
+        text-transform: uppercase;
+        color: #ffffff;
+
+
+    }
+
+
+    .tile_empty {
+      background-color: var(--color-empty);
+      border: 2px solid var(--color-empty-border);
+    }
+
+    .tile_correct {
+        background-color: var(--color-correct);
+    }
+
+    .tile_present {
+        background-color: var(--color-present);
+    }
+
+    .tile_absent {
+        background-color: var(--color-absent);
+    }
+
+    .tile_pop {
+        animation-name: PopIn;
+        animation-duration: 100ms;
+    }
+
+    .tile_selected {
+      border: 2px solid var(--color-selected-border);
+    }
+
+    .input_notpresent {
+      font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+
+
+    }
+
+    #wordslist{
+        height:400px;
+        width:400px;
+        overflow-y: scroll;
+
+    }
