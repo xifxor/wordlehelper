@@ -1,5 +1,5 @@
 {
-  "name": "Wordle Helper",
+  "name": "wordlehelper",
   "version": "1.0.0",
   "description": "Get some help with those tricky wordle puzzles.",
   "main": "server.js",
