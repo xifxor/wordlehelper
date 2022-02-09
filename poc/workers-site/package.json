@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "wordle-worker",
+  "version": "1.0.0",
+  "description": "Worker for wordle project",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "~0.1.2"
+  }
+}
