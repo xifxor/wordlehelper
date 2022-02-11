@@ -45,11 +45,10 @@ $(document).ready(function(){
     for(var col=0; col<lettersPerWord; col++){
       for(var row=0; row<wordRows; row++){
 
-          //newDiv = document.createElement("div");
         let id = "tile-" + row + "-" + col;
-        let $div = $("<div>", {id: id, "class": "tile tile_empty"});
+        let $input= $("<input>", {id: id, "class": "tile tile_empty", maxlength : 1});
         //newDiv
-        $('#container').append($div);
+        $('#container').append($input);
       }
 
     }
@@ -82,7 +81,7 @@ $(document).ready(function(){
           dictionary.load(strNewDictionaryPath);
 
           //reset tiles
-          $('.tile').html("");
+          $('.tile').val("");
           $('.tile').removeClass().addClass('tile tile_empty');
           $('#status').html("Dictionary loaded");
           $('#wordslist').html("");
@@ -96,7 +95,7 @@ $(document).ready(function(){
 
     //click the reset link
     $('#resetLink').click(function(){
-      $('.tile').html("");
+      $('.tile').val("");
       $('.tile').removeClass().addClass('tile tile_empty');
       $('#wordslist').html("");
       $('#problems').html("");
@@ -109,6 +108,7 @@ $(document).ready(function(){
     $(".tile").click(function(){
 
         selectedTile = this;
+        $(selectedTile).focus();
 
         if ( $(selectedTile).hasClass("tile_absent") )
         {
@@ -145,7 +145,7 @@ $(document).ready(function(){
             //reset the selected tile
             if (selectedTile != null){
 
-              $(selectedTile).html(" ");
+              $(selectedTile).val(" ");
               $(selectedTile).removeClass();
               $(selectedTile).addClass('tile tile_empty');
 
@@ -181,7 +181,7 @@ $(document).ready(function(){
 
             //Update the selected tile with the character
             console.log("Updating selected div to  " + char);
-            $(selectedTile).html(char);
+            $(selectedTile).val(char);
 
             //update class to show as not-present by default
             if ($(selectedTile).hasClass("tile_empty") )
@@ -198,6 +198,7 @@ $(document).ready(function(){
               newId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) +1);
               console.log("selecting div " + newId);
               selectedTile = $(newId)
+              $(selectedTile).focus();
               $(selectedTile).addClass("tile_selected")
 
             }else{
@@ -248,7 +249,7 @@ $(document).ready(function(){
 
     function doSearch(){
 
-      console.log("Running doSearch()");
+      console.log("========================================================================== Running doSearch() ==========================================================================");
 
 
       //copy current master dictionary
@@ -261,7 +262,7 @@ $(document).ready(function(){
       let arrNotPresentLetters = $('.tile').map(function(){
           if ( $(this).hasClass("tile_absent") )
           {
-            return $(this).html().toLowerCase()
+            return $(this).val().toLowerCase()
           }
         }).get();
 
@@ -301,13 +302,13 @@ $(document).ready(function(){
           let id = "#tile-" + row + "-" + col;
           //console.log("Processing id " + id);
           //if the cell contains a letter then store it
-          if ( ($(id).hasClass("tile_present")) && (/[a-zA-Z]/.test( $(id).html() )))
+          if ( ($(id).hasClass("tile_present")) && (/[a-zA-Z]/.test( $(id).val() )))
           {
-            arrPresentSets[col].push( $(id).html() );
+            arrPresentSets[col].push( $(id).val() );
           }
-          else if ( ($(id).hasClass("tile_correct")) && (/[a-zA-Z]/.test( $(id).html() )))
+          else if ( ($(id).hasClass("tile_correct")) && (/[a-zA-Z]/.test( $(id).val() )))
           {
-            arrCorrectSets[col].push( $(id).html() );
+            arrCorrectSets[col].push( $(id).val() );
           }
 
         }
