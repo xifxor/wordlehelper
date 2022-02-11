@@ -30,16 +30,6 @@
   };
 
 
-  //delay a function
-  function delay(fn, ms) {
-    let timer = 0
-    return function(...args) {
-      clearTimeout(timer)
-      timer = setTimeout(fn.bind(this, ...args), ms || 0)
-    }
-  }
-
-
 $(document).ready(function(){
 
     //global vars
@@ -232,24 +222,33 @@ $(document).ready(function(){
 
     //this function should run the search just once, regardless of how many updates
     // in the last 1 second.  ** not figured this bit out yet.
-    function startSeachCountdown(){
-
-      console.log("running startSeachCountdown"  );
-
-
-    //  globalTimer = setTimeout(doSearch,  1000);
-      doSearch();
-
-
-
-
+    function startSeachCountdown(callback, wait) {
+      let timeout;
+      return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(function () { callback.apply(this, args); }, wait);
+      };
     }
+
+    // The listeners below will separately fire if clicking OR typing ends. 
+    // This means if a user is simultaneously typing and clicking the doSearch() function will fire twice.
+
+    window.addEventListener('keyup', startSeachCountdown( () => {
+        // code you would like to run 1000ms after the keyup event has stopped firing
+        // further keyup events reset the timer, as expected
+        doSearch();
+    }, 1500))
+
+    window.addEventListener('click', startSeachCountdown( () => {
+      // code you would like to run 1000ms after the keyup event has stopped firing
+      // further keyup events reset the timer, as expected
+      doSearch();
+  }, 1500))
 
 
     function doSearch(){
 
       console.log("Running doSearch()");
-
 
 
       //copy current master dictionary
