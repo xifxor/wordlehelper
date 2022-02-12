@@ -1,11 +1,15 @@
 name = "wordlehelper"
 type = "webpack"
 
-#account_id = "99b4c8e2f39df9268d52740fd9a0daae"
-#zone_id = "fb8151fee63f09f09eb9d5751ec45aee"
+account_id = "99b4c8e2f39df9268d52740fd9a0daae"
+zone_id = "fb8151fee63f09f09eb9d5751ec45aee"
 workers_dev = true
-#route = "wordlehelper.jak.onl/*"
+route = "wordlehelper.jak.onl/*"
 compatibility_date = "2022-02-08"
+kv_namespaces = [ 
+  { binding = "WORDLEASSET", id = "3238a4f6bc9d43daa9c28cc4b6719276" }
+]
+
 
 [site]
 bucket = "./public" 
