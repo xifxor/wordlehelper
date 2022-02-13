@@ -129,7 +129,9 @@ $(document).ready(function(){
         //$(selectedTile).addClass("tile_selected")
 
         //update results
-        startSeachCountdown();
+        //startSeachCountdown();
+        //console.log("Running startSeachCountdown");
+        //startSeachCountdown( () => {doSearch();}, 1500)
     });
 
 
@@ -138,8 +140,46 @@ $(document).ready(function(){
     $('.tile').on('keyup input', function(e){
 
 
-      if (/[a-zA-Z]/.test( $(this).val() ))
+      //backspace was pressed
+      if(e.keyCode == 8){
+        console.log("Backspace was pressed");
+
+        if ( $(this).val() == '' ) //if this cell is blank then clear the prvevious one
+        {
+          console.log("Backspace value is empty");
+
+          //identify previous tile
+          coords = $(this).attr('id').split("-").slice(1);
+
+          if ( coords[1] > 0 ) //backspace on all but thefirst column in row
+          { 
+            newId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) -1); //previous tile in this row
+          }
+          else //backspace on first column in row
+          {
+            if (coords[0] > 0 ){ //if this isnt the first row move up a row and select the last tile
+              newId = "#tile-" + (parseInt(coords[0]) - 1) + "-" + (lettersPerWord - 1) ;
+            }else{ //just stay on the first row first column
+              newId = "#tile-0-0";
+            }
+  
+          }
+          
+          //clear class
+          $(this).removeClass();
+          $(this).addClass("tile tile_empty");
+
+          //set new focus
+          console.log("setting focus to " + newId);
+          $(newId).focus();
+
+       }
+
+      }
+      else if (/[a-zA-Z]/.test( $(this).val() ))
       {
+
+        console.log("Alpha character was pressed");
 
         $(this).addClass('tile_absent');
 
@@ -165,58 +205,12 @@ $(document).ready(function(){
         console.log("setting focus to " + newId);
         $(newId).focus();
 
-      }else{
-        //
-
-        if(e.keyCode == 8){
-          console.log("Backspace");
-
-          if ( $(this).val() == '' ) //if this cell is blank then clear the prvevious one
-          {
-            console.log("Backspace value is empty");
-
-            //identify previous tile
-            coords = $(this).attr('id').split("-").slice(1);
-
-            if ( coords[1] > 0 ) //backspace on all but thefirst column in row
-            { 
-              newId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) -1); //previous tile in this row
-            }
-            else //backspace on first column in row
-            {
-              if (coords[0] > 0 ){ //if this isnt the first row move up a row and select the last tile
-                newId = "#tile-" + (parseInt(coords[0]) - 1) + "-" + (lettersPerWord - 1) ;
-              }else{ //just stay on the first row first column
-                newId = "#tile-0-0";
-              }
-    
-            }
-            
-            //clear class
-            $(this).removeClass();
-            $(this).addClass("tile tile_empty");
-
-            //set new focus
-            console.log("setting focus to " + newId);
-            $(newId).focus();
-
-          }
-          else //if this cell has something in it then clear this one
-          {
-            console.log("Backspace value not empty");
-            $(this).val('');
-            $(this).removeClass();
-            $(this).addClass("tile");
-
-          }
-
-        }
-  
       }
 
        //search dictionary
-      startSeachCountdown();
-
+      //startSeachCountdown();
+      //console.log("Running startSeachCountdown");
+     // startSeachCountdown( () => {doSearch();}, 1500)
 
     });
 
@@ -234,7 +228,7 @@ $(document).ready(function(){
 
     // The listeners below will separately fire if clicking OR typing ends. 
     // This means if a user is simultaneously typing and clicking the doSearch() function will fire twice.
-
+    
     window.addEventListener('keyup', startSeachCountdown( () => {
         // code you would like to run 1000ms after the keyup event has stopped firing
         // further keyup events reset the timer, as expected
