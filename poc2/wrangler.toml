@@ -1,11 +1,12 @@
 name = "wordlehelper"
 type = "webpack"
 
-account_id = "ed226d52515e5d08d890067fa7c8e956"
-zone_id = "40b6cf6725d31d88f16a8e728d5500f2"
+account_id = ""
+zone_id = ""
 workers_dev = true
-route = "wordlehelper.isnow.online/*"
+route = ""
 compatibility_date = "2022-02-08"
+
 
 [site]
 bucket = "./public"
