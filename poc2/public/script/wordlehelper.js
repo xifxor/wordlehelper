@@ -393,21 +393,15 @@ $(document).ready(function(){
       */
       if (arrNotPresentLetters.length > 0)
       {
-      console.log("Removing present letters from non-present letters")
+      console.log("Removing present and correct letters from non-present letters")
         //remove present letters from the not-present letters
         arrPresentLettersSet = new Set(arrPresentLetters);
+        arrCorrectLettersSet = new Set(arrCorrectLetters);
+        arrPresentAndCorrectLettersSet = new Set([...arrPresentLettersSet, ...arrCorrectLettersSet]);
         arrNotPresentLetters = arrNotPresentLetters.filter( (x) => {
-          return !arrPresentLettersSet.has(x);
+          return !arrPresentAndCorrectLettersSet.has(x);
         });
-      console.log('not-present letters after removing present letters: ' + arrNotPresentLetters.join(","));
-
-      console.log("Removing correct letters from non-present letters")
-      //remove correct letters from the not-present letters
-      arrCorrectLettersSet = new Set(arrCorrectLetters);
-      arrNotPresentLetters = arrNotPresentLetters.filter( (x) => {
-        return !arrCorrectLettersSet.has(x);
-      });
-      console.log('not-present letters after removing correct letters: ' + arrNotPresentLetters.join(","));
+      console.log('not-present letters after removing present and correct letters: ' + arrNotPresentLetters.join(","));
 
 
         console.log("Filtering for non-present letters")
