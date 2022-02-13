@@ -9,6 +9,5 @@ compatibility_date = "2022-02-08"
 
 
 [site]
-bucket = "./public" 
+bucket = "./public"
 entry-point = "./workers-site"
-

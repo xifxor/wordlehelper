@@ -28,9 +28,20 @@
         overflow-y: hidden;
       }
 
+    .instructions {
+      font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+    }
 
+    .container {
+      display:inline-block;
+    }
+    .content {
+      float:left;
+      margin-right:10px;
+    }
 
-    #container {
+    #gridcontainer {
       display: grid;
       grid: repeat(6, 62px) / auto-flow 62px;
       grid-gap: 5px;
@@ -39,8 +50,17 @@
 
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
 
+    }
+
+    
+    #wordcontainer{
+      padding:10px;
+      height:400px;
+      width:400px;
+      overflow-y: scroll;
 
     }
+
 
 
     .tile {
@@ -51,6 +71,10 @@
         text-align: center;
         box-sizing: border-box;
 
+        background: none;
+        box-shadow: none;
+        border-radius: 0px;
+        border:0px;
 
         height:62px;
         width:62px;
@@ -96,12 +120,5 @@
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
       font-size: 16px;
 
-
-    }
-
-    #wordslist{
-        height:400px;
-        width:400px;
-        overflow-y: scroll;
 
     }

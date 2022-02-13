@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Wordle Helper</title>
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="script/wordlehelper.js"></script>
@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <div class="instructions">
     <h1>Wordle Helper</h1>
     <h3>Instructions</h3>
     <ul>
@@ -22,6 +23,7 @@
           <li>Grey - letter does not exist in word.</li>
         </ul>
     </ul>
+  </div>
     <br /><br />
     Language: <select id="languageselect">
             <option value="english">English</option>
@@ -31,16 +33,27 @@
         <br>
 
 
-    <div id="container">
+    <div class="container">
 
+      <div class="content" id="gridcontainer">
+
+
+      </div>
+      
+      <div  class="content">
+        <div id="status">Word List</div>
+        <div id="wordcontainer"></div>
+      </div>
 
     </div>
 
 
     <br /><br />
     <div id="problems"></div>
-    <div id="status"></div>
-    <div id="wordslist"></div>
+    
+    
+
+    <div id="testdiv"></div>
 
   </body>
 </html>
