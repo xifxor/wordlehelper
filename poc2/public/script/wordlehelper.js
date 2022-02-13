@@ -264,23 +264,7 @@ $(document).ready(function(){
       console.log("Not-present letters:" + arrNotPresentLetters.join(","));
 
 
-      /*
-      Exclude words with letters that are not present
-      */
-      if (arrNotPresentLetters.length > 0)
-      {
-        console.log("Filtering for non-present letters")
-        arrFilteredWords = arrFilteredWords.filter(function(word){
-          //console.log("testing " + word)
-          return !arrNotPresentLetters.some(function(letter){
 
-              return word.toLowerCase().indexOf(letter) != -1;
-              }
-          );
-
-        });
-        console.log("Remaining words after filtering non-present letters:" + arrFilteredWords.length);
-      }
 
 
       /*
@@ -312,6 +296,7 @@ $(document).ready(function(){
       //create flat arrays for both type
       arrPresentLetters = arrPresentSets.flat()
       arrCorrectLetters = arrCorrectSets.flat()
+
 
       /*
       Exclude words that dont have all of the Present Letters in them
@@ -403,7 +388,40 @@ $(document).ready(function(){
 
       }
 
+      /*
+      Exclude words with letters that are not present
+      */
+      if (arrNotPresentLetters.length > 0)
+      {
+      console.log("Removing present letters from non-present letters")
+        //remove present letters from the not-present letters
+        arrPresentLettersSet = new Set(arrPresentLetters);
+        arrNotPresentLetters = arrNotPresentLetters.filter( (x) => {
+          return !arrPresentLettersSet.has(x);
+        });
+      console.log('not-present letters after removing present letters: ' + arrNotPresentLetters.join(","));
 
+      console.log("Removing correct letters from non-present letters")
+      //remove correct letters from the not-present letters
+      arrCorrectLettersSet = new Set(arrCorrectLetters);
+      arrNotPresentLetters = arrNotPresentLetters.filter( (x) => {
+        return !arrCorrectLettersSet.has(x);
+      });
+      console.log('not-present letters after removing correct letters: ' + arrNotPresentLetters.join(","));
+
+
+        console.log("Filtering for non-present letters")
+        arrFilteredWords = arrFilteredWords.filter(function(word){
+          //console.log("testing " + word)
+          return !arrNotPresentLetters.some(function(letter){
+
+              return word.toLowerCase().indexOf(letter) != -1;
+              }
+          );
+
+        });
+        console.log("Remaining words after filtering non-present letters:" + arrFilteredWords.length);
+      }
       //check and alert for any problems
       //   not-present letters that are also marked as  present (arrNotPresentLetters contains any of arrPresentLetters)
       //   not-present letters that are also marked as correct  letters (arrNotPresentLetters contains any of arrCorrectLetters)
