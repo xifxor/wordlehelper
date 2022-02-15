@@ -264,23 +264,7 @@ $(document).ready(function(){
       console.log("Not-present letters:" + arrNotPresentLetters.join(","));
 
 
-      /*
-      Exclude words with letters that are not present
-      */
-      if (arrNotPresentLetters.length > 0)
-      {
-        console.log("Filtering for non-present letters")
-        arrFilteredWords = arrFilteredWords.filter(function(word){
-          //console.log("testing " + word)
-          return !arrNotPresentLetters.some(function(letter){
 
-              return word.toLowerCase().indexOf(letter) != -1;
-              }
-          );
-
-        });
-        console.log("Remaining words after filtering non-present letters:" + arrFilteredWords.length);
-      }
 
 
       /*
@@ -304,14 +288,17 @@ $(document).ready(function(){
           else if ( ($(id).hasClass("tile_correct")) && (/[a-zA-Z]/.test( $(id).val() )))
           {
             arrCorrectSets[col].push( $(id).val() );
+            console.log("Correct letter found in column: " + col  + " row: " + row + ` letter: ${$(id).val()}`);
           }
 
         }
       }
 
       //create flat arrays for both type
+      console.log("arrCorrectSets: " + arrCorrectSets);
       arrPresentLetters = arrPresentSets.flat()
       arrCorrectLetters = arrCorrectSets.flat()
+      console.log("arrCorrectLetters" + arrCorrectLetters);
 
       /*
       Exclude words that dont have all of the Present Letters in them
@@ -403,18 +390,77 @@ $(document).ready(function(){
 
       }
 
+      /*
+      Exclude words with letters that are not present
+      */
+      if (arrNotPresentLetters.length > 0)
+      {
+      console.log("Removing present and correct letters from non-present letters")
+        //remove present letters from the not-present letters
+        arrPresentLettersSet = new Set(arrPresentLetters);
+        arrCorrectLettersSet = new Set(arrCorrectLetters);
+        arrPresentAndCorrectLettersSet = new Set([...arrPresentLettersSet, ...arrCorrectLettersSet]);
+        arrNotPresentLetters = arrNotPresentLetters.filter( (x) => {
+          return !arrPresentAndCorrectLettersSet.has(x);
+        });
+      console.log('not-present letters after removing present and correct letters: ' + arrNotPresentLetters.join(","));
+
+
+        console.log("Filtering for non-present letters")
+        arrFilteredWords = arrFilteredWords.filter(function(word){
+          //console.log("testing " + word)
+          return !arrNotPresentLetters.some(function(letter){
+
+              return word.toLowerCase().indexOf(letter) != -1;
+              }
+          );
+
+        });
+        console.log("Remaining words after filtering non-present letters:" + arrFilteredWords.length);
+      }
+
+
+      //function to check if all elements of an array are equal to the first
+      function checkArrayEqualElements(_array)
+        {
+          if(typeof _array !== 'undefined')    
+          {
+            var firstElement = _array[0];
+            return _array.every(function(element)
+          {
+            return element === firstElement;
+          });
+          }
+            return "Array is Undefined" ;
+        } 
 
       //check and alert for any problems
       //   not-present letters that are also marked as  present (arrNotPresentLetters contains any of arrPresentLetters)
       //   not-present letters that are also marked as correct  letters (arrNotPresentLetters contains any of arrCorrectLetters)
       //   differing correct letters in a single column (any arrCorrectSets  has length > 1)
+      errorText = "";
+      for(var col=0; col<lettersPerWord; col++){
+        if (arrCorrectSets[col].length > 1){
+          if (checkArrayEqualElements(arrCorrectSets[col]) == false){
+          //errorColumn is only used to display the column number in the error message for a human. They normally like to see 1,2,3,4,5,6,7,8,9,10 when counting.
+          errorColumn = col + 1;
+          letterUsedAsCorrect = arrCorrectSets[col].slice(-1).toString().toUpperCase();
+          //The console log can be removed and was only used to format the error message for a human.
+          console.log("Problem: Different letters marked correct in column " + errorColumn + ". Using \"" + letterUsedAsCorrect + "\""); 
+          //This is the error message that is displayed to the user.
+          errorText += "Problem: Different letters marked correct in column " + errorColumn + ". Using \"" + letterUsedAsCorrect + "\" as it is lower." + "<br>";
+          }
+        }
+      }
 
 
+
+      
 
       //Display results
       $("#status").html( "List of " + arrFilteredWords.length + " potential words:"  );
       $("#wordcontainer").html( arrFilteredWords.join("<br>") );
-
+      $("#problems").html( errorText );
     }
 
 
