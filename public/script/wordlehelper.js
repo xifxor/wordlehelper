@@ -296,8 +296,8 @@ $(document).ready(function(){
 
       //create flat arrays for both type
       console.log("arrCorrectSets: " + arrCorrectSets);
-      arrPresentLetters = arrPresentSets.flat()
-      arrCorrectLetters = arrCorrectSets.flat()
+      arrPresentLetters = arrPresentSets.flat().map((x) => x.toLowerCase());
+      arrCorrectLetters = arrCorrectSets.flat().map((x) => x.toLowerCase());
       console.log("arrCorrectLetters" + arrCorrectLetters);
 
       /*
