@@ -133,6 +133,15 @@
         color: #ffffff;
 
         caret-color: transparent;
+
+        /* no text select */
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+         -khtml-user-select: none; /* Konqueror HTML */
+           -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
     }
 
 
@@ -144,6 +153,9 @@
     .tile_absent {
       background-color: var(--color-absent);
       transform: scaleY(-1) rotateX(-180deg);
+      -webkit-transform: scaleY(-1) rotateX(-180deg);
+       -moz-transform: scaleY(-1) rotateX(-180deg);
+      -ms-transform: scaleY(-1) rotateX(-180deg);
       transition: transform 0.8s;
       transform-style: preserve-3d;
     }
@@ -151,6 +163,11 @@
     .tile_present {
       background-color: var(--color-present);
       transform: scaleY(1);
+      -webkit-transform:  scaleY(1);
+      -moz-transform:  scaleY(1);
+     -ms-transform:  scaleY(1);
+
+
       transition: transform 0.8s;
       transform-style: preserve-3d;
       animation: colorchange_present 1s;
@@ -161,6 +178,12 @@
     .tile_correct {
       background-color: var(--color-correct);
       transform: scaleY(-1) rotateX(-180deg);
+
+      -webkit-transform:  scaleY(-1) rotateX(-180deg);
+      -moz-transform: scaleY(-1) rotateX(-180deg);
+     -ms-transform: scaleY(-1) rotateX(-180deg);
+
+
       transition: transform 0.8s;
       transform-style: preserve-3d;
       animation: colorchange_tocorrect 1s;
