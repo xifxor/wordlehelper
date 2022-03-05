@@ -58,6 +58,7 @@
       font-size: 0.8rem;
       background-color: rgb(175, 204, 214);
       padding:3px;
+      cursor:pointer;
     }
 
     #instructionstitle{
@@ -140,26 +141,46 @@
       border: 2px solid var(--color-empty-border);
     }
 
-    .tile_correct {
-        background-color: var(--color-correct);
+    .tile_absent {
+      background-color: var(--color-absent);
+      transform: scaleY(-1) rotateX(-180deg);
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
     }
 
     .tile_present {
-        background-color: var(--color-present);
-    }
+      background-color: var(--color-present);
+      transform: scaleY(1);
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      animation: colorchange_present 1s;
 
-    .tile_absent {
-        background-color: var(--color-absent);
-    }
+   }
 
-    .tile_pop {
-        animation-name: PopIn;
-        animation-duration: 100ms;
+
+    .tile_correct {
+      background-color: var(--color-correct);
+      transform: scaleY(-1) rotateX(-180deg);
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      animation: colorchange_tocorrect 1s;
     }
 
     .tile_selected {
       border: 2px solid var(--color-selected-border);
     }
+
+    /* colour change during transitions */
+    @keyframes colorchange_tocorrect {
+      0% { background: var(--color-present); }
+      100% { background: var(--color-correct); }
+    }
+
+    @keyframes colorchange_present {
+      0% { background: var(--color-absent); }
+      100% { background: var(--color-present);}
+    }
+
 
     .input_notpresent {
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;

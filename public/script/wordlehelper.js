@@ -132,9 +132,17 @@ $(document).ready(function(){
     });
 
 
+    $('.tile').on('keyup input', function(e){
+
+    });
+
+
+
     //keystrokes on tiles
     $('.tile').on('keydown input', function(e){
 
+      //get the grid coordinates for this tile
+      coords = $(this).attr('id').split("-").slice(1);
 
       //backspace was pressed
       if(e.keyCode == 8){
@@ -161,11 +169,7 @@ $(document).ready(function(){
           }
 
         }
-        
-        //reset class
-       
-        
-
+  
         //if the currently focused tile is blank then move back one and clear that
         if ( $(this).val() == '' ) 
         { 
@@ -190,15 +194,93 @@ $(document).ready(function(){
         }
 
       }
+      //space bar pressed
+      else if(e.keyCode == 32){
+        console.log("Spacebar pressed");
+        $(this).click();
+
+      } 
+
+      //left arrow
+      else if(e.keyCode == 37){
+        console.log("Left Arrow pressed");
+
+        //calculate the previous tile
+        if ( coords[1] > 0 ) //backspace on all but the first column in row
+        { 
+          //previous tile in this row
+          previousTileId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) -1); 
+        }
+        else //backspace on first column in row
+        {
+          //if this isnt the first row move up a row and select the last tile
+          if (coords[0] > 0 ){ 
+            previousTileId = "#tile-" + (parseInt(coords[0]) - 1) + "-" + (lettersPerWord - 1) ;
+          }else{ //just stay on the first row first column
+            previousTileId = "#tile-0-0";
+          }
+
+        }
+
+        $(previousTileId).focus();
+
+      }
+
+      //up arrow
+      else if(e.keyCode == 38){
+        console.log("Up Arrow pressed");
+
+        //if this isnt the first row ove up a row
+        if (coords[0] > 0){ 
+          newId = "#tile-" + (parseInt(coords[0]) - 1) + "-" + coords[1];
+        }
+        
+        $(newId).focus();
+
+      }
+
+      //right arrow
+      else if(e.keyCode == 39){
+        console.log("Right Arrow pressed");
+
+        //calculate the next tile
+        if ( coords[1] < (lettersPerWord - 1) ) //key press on all but last column in row
+        { 
+          newId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) +1); //next tile in this row
+        }
+        else //key press on last column in row
+        {
+          if (coords[0] < (wordRows-1)){ //if this isnt the last row move down a row
+            newId = "#tile-" + (parseInt(coords[0]) + 1) + "-0";
+          }else{ //else just stay on the last row
+            newId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) );
+          }
+
+        }
+
+        $(newId).focus();
+
+      }
+
+      //down arrow
+      else if(e.keyCode == 40){
+        console.log("Down Arrow pressed");
+
+        //if this isnt the last row move down a row
+        if (coords[0] < (wordRows-1)){ 
+          newId = "#tile-" + (parseInt(coords[0]) + 1) + "-" + coords[1];
+        }
+        
+        $(newId).focus();
+      }
+
       //alpha character pressed
       else if (/[a-zA-Z]/.test( $(this).val() ))
       {
         console.log("alpha key pressed");
         $(this).addClass('tile_absent');
 
-        //Identiy the next tile
-        coords = $(this).attr('id').split("-").slice(1);
-
+        //calculate the next tile
         if ( coords[1] < (lettersPerWord - 1) ) //key press on all but last column in row
         { 
           newId = "#tile-" + coords[0] + "-" + (parseInt(coords[1]) +1); //next tile in this row
@@ -234,16 +316,15 @@ $(document).ready(function(){
       };
     }
 
-    // The listeners below will separately fire if clicking OR typing ends. 
-    // This means if a user is simultaneously typing and clicking the doSearch() function will fire twice.
-    
+    // do search when a key is pressed on a tile    
     $('.tile').on('keyup', startSeachCountdown( () => {
         doSearch();
-    }, 1500))
+    }, 1000))
 
+    //search when a tile is clicked
     $('.tile').on('click', startSeachCountdown( () => {
       doSearch();
-  }, 1500))
+    }, 1000))
 
 
     function doSearch(){
