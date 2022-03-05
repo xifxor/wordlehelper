@@ -134,14 +134,6 @@
 
         caret-color: transparent;
 
-        /* no text select */
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-         -khtml-user-select: none; /* Konqueror HTML */
-           -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently
-                                      supported by Chrome, Edge, Opera and Firefox */
     }
 
 
@@ -162,10 +154,10 @@
 
     .tile_present {
       background-color: var(--color-present);
-      transform: scaleY(1);
-      -webkit-transform:  scaleY(1);
-      -moz-transform:  scaleY(1);
-     -ms-transform:  scaleY(1);
+      transform: scaleY(1) rotateX(0deg);
+      -webkit-transform:  scaleY(1) rotateX(0deg);
+      -moz-transform:  scaleY(1) rotateX(0deg);
+     -ms-transform:  scaleY(1) rotateX(0deg);
 
 
       transition: transform 0.8s;
@@ -177,11 +169,11 @@
 
     .tile_correct {
       background-color: var(--color-correct);
-      transform: scaleY(-1) rotateX(-180deg);
+      transform: scaleY(-1) rotateX(180deg);
 
-      -webkit-transform:  scaleY(-1) rotateX(-180deg);
-      -moz-transform: scaleY(-1) rotateX(-180deg);
-     -ms-transform: scaleY(-1) rotateX(-180deg);
+      -webkit-transform:  scaleY(-1) rotateX(180deg);
+      -moz-transform: scaleY(-1) rotateX(180deg);
+     -ms-transform: scaleY(-1) rotateX(180deg);
 
 
       transition: transform 0.8s;
