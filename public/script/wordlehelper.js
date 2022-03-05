@@ -38,6 +38,7 @@ $(document).ready(function(){
     let wordRows = 6;
 
 
+      
 
     //create tiles
     // css grid appears to populate vertically.  
@@ -48,7 +49,7 @@ $(document).ready(function(){
         $("<input>", {"id": "tile-" + row + "-" + col, 
                       "class": "tile tile_empty", 
                       "maxlength" : 1
-                    }).appendTo('#gridcontainer');
+                    }).appendTo('#grid');
 
       }
 
@@ -125,6 +126,10 @@ $(document).ready(function(){
 
     });
 
+    //toggle instructions
+    $('#instructionstitle').click(function(){
+      $("#instructions").toggle("slow");
+    });
 
 
     //keystrokes on tiles
@@ -471,7 +476,7 @@ $(document).ready(function(){
       
 
       //Display results
-      $("#status").html( "List of " + arrFilteredWords.length + " potential words:"  );
+      $("#status").html( "Found " + arrFilteredWords.length + " words:"  );
       $("#wordlist").html( arrFilteredWords.join("<br>") );
       $("#problems").html( errorText );
     }

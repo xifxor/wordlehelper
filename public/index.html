@@ -13,40 +13,58 @@
 
   <body>
     
-    <div id="header">Wordle Helper</div>
-    <div class="instructions">
-      <h3>Instructions</h3>
-      <ul>
-        <li>Select a tile and type a letter.</li>
-        <li>Tap on the tiles to change their color.</li>
-          <ul>
-            <li>Green - letter exists in word and in correct position.</li>
-            <li>Yellow - letter exists in word but in wrong position.</li>
-            <li>Grey - letter does not exist in word.</li>
-          </ul>
-      </ul>
-    </div>
-    <div id="languagecontainer">
-
-      Language: 
-      <select id="languageselect">
-        <option value="english">English</option>
-        <option value="spanish">Spanish</option>
-      </select>
-      <a href="#" id="resetLink">reset</a>
-
-    </div>
-
-
-
-    <div class="content" id="gridcontainer"></div>
+    <div id="header">
+      <div id="title">Wordle Helper</div>
+      <div id="languageselectcontainer">
+        <a href="#" id="resetLink">reset</a>
+        <select id="languageselect">
+          <option value="english">English</option>
+          <option value="spanish">Spanish</option>
+        </select>
         
-    <div id="wordlistcontainer">
-      <div id="status">Word List</div>
-      <div id="wordlist"></div>
-    </div>
+  
+      </div>
 
+    </div>
+    <div id="instructioncontainer">
+      <div id="instructionstitle">Instructions ▾</div>
+      <div id="instructions">
+        <ul>
+          <li>Select a tile and type a letter.</li>
+          <li>Tap on the tiles to change their color.</li>
+            <ul>
+              <li>Green - letter exists in word and in correct position.</li>
+              <li>Yellow - letter exists in word but in wrong position.</li>
+              <li>Grey - letter does not exist in word.</li>
+            </ul>
+        </ul>
+      </div>
+    </div>
+    
     <div id="problems"></div>
 
+
+    <div class="contentcontainer">
+
+      <div id="gridcontainer">
+        <div id="grid"></div>
+      </div>
+      
+      <div id="wordlistcontainer">
+        <div id="status">Word List</div>
+        <div id="wordlist"></div>
+      </div>
+
+    </div>
+
+   
+        <br><br><br>
+    
+
+    
+
+    <div id="footer">
+      <a href="https://droobilicious.isnow.online/2022/02/wordle-helper.html" target="_blank">info</a>
+    </div>
   </body>
 </html>

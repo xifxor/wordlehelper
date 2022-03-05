@@ -26,49 +26,86 @@
         padding: 0;
         /* Prevent scrollbar appearing on page transition */
         overflow-y: hidden;
+        
       }
 
 
-    #header{
+    #header {
       background-color: #6aaa64;
-      color:white;
+      
+      padding:3px;
+      height:2.2rem;
+
+    }
+
+    #title{
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
       font-size: 2.0rem;
+      color:white;
+      float:left;
+      display: inline-block;
     }
 
-    .instructions {
+    #languageselectcontainer {
+      float:right;
+      display: inline-block;
+  
+
+    }
+
+    #instructioncontainer {
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.8rem;
+      background-color: rgb(175, 204, 214);
+      padding:3px;
     }
 
-    .container {
-      display:inline-block;
+    #instructionstitle{
+      font-size: 1rem;
+      font-weight:bold;
     }
-    .content {
-      float:left;
-      margin-right:10px;
+
+
+
+
+    .contentcontainer {
+      display:inline-block;
+      height:400px;
+
+      /*border:solid 1px green;*/
     }
 
     #gridcontainer {
+      float:left;
+      /*border:solid 1px red;*/
+      margin-left:10px;
+
+    }
+
+
+    #grid {   
       display: grid;
       grid: repeat(6, 62px) / auto-flow 62px;
       grid-gap: 5px;
-      margin-top:10px;
-      margin-left:10px;
-
+ 
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
-
     }
 
     
-    #wordcontainer{
-      padding:10px;
-      height:400px;
-      width:400px;
-      overflow-y: scroll;
+    #wordlistcontainer {
+      float:left;
+      /*border:solid 1px blue;*/
+      width:160px;
+      margin-left:10px;
+      font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
 
     }
 
+    #wordlist {
+      overflow-y: scroll;
+      height:400px;
+    }
 
 
     .tile {
@@ -136,7 +173,28 @@
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.8rem;
       color: #fca503;
-      margin-left: 10px;
-      margin-top:10px;
-      margin-left:10px;
+      padding:5px;
+    }
+
+
+
+    #footer{
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      text-align: center;
+      padding:3px;
+    }
+
+    #footer a{
+      text-decoration:none;
+      font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      color:black;
+    }
+
+    #footer a:hover{
+      text-decoration:underline;
     }
