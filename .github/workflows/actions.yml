@@ -17,3 +17,17 @@ jobs:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
           CF_ROUTE: ${{ secrets.CF_ROUTE }}
+  deploy2:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Worker with Wrangler
+    steps:
+      - uses: actions/checkout@main
+      - name: Publish
+        uses: cloudflare/wrangler-action@1.3.0
+        with:
+          apiToken: ${{ secrets.DROO_CF_API_TOKEN }}
+          workingDirectory: '.'
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.DROO_CF_ACCOUNT_ID }}
+          CF_ZONE_ID: ${{ secrets.DROO_CF_ZONE_ID }}
+          CF_ROUTE: ${{ secrets.DROO_CF_ROUTE }}
