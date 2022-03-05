@@ -28,6 +28,14 @@
         overflow-y: hidden;
       }
 
+
+    #header{
+      background-color: #6aaa64;
+      color:white;
+      font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 2.0rem;
+    }
+
     .instructions {
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.8rem;
@@ -86,7 +94,7 @@
         text-transform: uppercase;
         color: #ffffff;
 
-
+        caret-color: transparent;
     }
 
 

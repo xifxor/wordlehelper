@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Wordle Helper</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="script/wordlehelper.js"></script>
@@ -11,49 +12,41 @@
   </head>
 
   <body>
+    
+    <div id="header">Wordle Helper</div>
     <div class="instructions">
-    <h1>Wordle Helper</h1>
-    <h3>Instructions</h3>
-    <ul>
-      <li>Select a tile and type a letter.</li>
-      <li>Tap on the tiles to change their color.</li>
-        <ul>
-          <li>Green - letter exists in word and in correct position.</li>
-          <li>Yellow - letter exists in word but in wrong position.</li>
-          <li>Grey - letter does not exist in word.</li>
-        </ul>
-    </ul>
-  </div>
-    <br /><br />
-    Language: <select id="languageselect">
-            <option value="english">English</option>
-            <option value="spanish">Spanish</option>
-          </select>
-          <a href="#" id="resetLink">reset</a>
-        <br>
+      <h3>Instructions</h3>
+      <ul>
+        <li>Select a tile and type a letter.</li>
+        <li>Tap on the tiles to change their color.</li>
+          <ul>
+            <li>Green - letter exists in word and in correct position.</li>
+            <li>Yellow - letter exists in word but in wrong position.</li>
+            <li>Grey - letter does not exist in word.</li>
+          </ul>
+      </ul>
+    </div>
+    <div id="languagecontainer">
 
-
-    <div class="container">
-
-      <div class="content" id="gridcontainer">
-
-
-      </div>
-      
-      <div  class="content">
-        <div id="status">Word List</div>
-        <div id="wordcontainer"></div>
-      </div>
+      Language: 
+      <select id="languageselect">
+        <option value="english">English</option>
+        <option value="spanish">Spanish</option>
+      </select>
+      <a href="#" id="resetLink">reset</a>
 
     </div>
 
 
-    <br /><br />
-    <div id="problems"></div>
-    
-    
 
-    <div id="testdiv"></div>
+    <div class="content" id="gridcontainer"></div>
+        
+    <div id="wordlistcontainer">
+      <div id="status">Word List</div>
+      <div id="wordlist"></div>
+    </div>
+
+    <div id="problems"></div>
 
   </body>
 </html>
