@@ -36,9 +36,11 @@ $(document).ready(function(){
     let strDictionaryPath = 'dics/english_5_letter.txt';
     let lettersPerWord = 5;
     let wordRows = 6;
+    let defaultWordListMessage = "<h2>Word list...</h2>";
 
-
-      
+    
+    //set default wordlist message
+    $('#wordlist').html( defaultWordListMessage );
 
     //create tiles
     // css grid appears to populate vertically.  
@@ -54,6 +56,16 @@ $(document).ready(function(){
       }
 
     }
+
+    function resetAll(){
+      $('#wordlist').html( defaultWordListMessage );
+      $('.tile').val("")
+                .removeClass()
+                .addClass('tile tile_empty');
+      $('#problems').html("");
+      $('#tile-0-0').focus();
+    }
+
 
     //load default dictionary
     dictionary.load(strDictionaryPath);
@@ -82,29 +94,16 @@ $(document).ready(function(){
           //load the new dictionray
           dictionary.load(strNewDictionaryPath);
 
-          //reset tiles
-          $('.tile').val("")
-                    .removeClass()
-                    .addClass('tile tile_empty');
-          $('#status').html("Dictionary loaded");
-          $('#wordlist').html("");
+          //reset board
+          resetAll();
 
-        }else{
-          //no change to dictionary
         }
 
     });
 
 
     //click the reset link
-    $('#resetLink').click(function(){
-      $('.tile').val("")
-                .removeClass()
-                .addClass('tile tile_empty');
-      $('#wordlist').html("");
-      $('#problems').html("");
-      $('#status').html("Word suggestions:");
-    });
+    $('#resetLink').click(function(){ resetAll(); });
 
 
     //select tile (and change tile mode)
@@ -130,12 +129,6 @@ $(document).ready(function(){
     $('#instructionstitle').click(function(){
       $("#instructions").toggle("slow");
     });
-
-
-    $('.tile').on('keyup input', function(e){
-
-    });
-
 
 
     //keystrokes on tiles
@@ -335,8 +328,7 @@ $(document).ready(function(){
       }).length;
       
       if (nonEmptyCount <= 0){
-        $("#status").html( "Word list:"  );
-        $("#wordlist").html( "" );
+        $("#wordlist").html( defaultWordListMessage );
         $("#problems").html( "" );
 
         return;
@@ -409,8 +401,6 @@ $(document).ready(function(){
         console.log("Filtering for present letters")
         arrFilteredWords = arrFilteredWords.filter(function(word){
           return arrPresentLetters.every(function(letter){
-              // r = word.toLowerCase().indexOf(letter.toLowerCase()) != -1;
-              //console.log("checking letter " + letter + " against " + word + " result " + r);
               return word.toLowerCase().indexOf(letter.toLowerCase()) != -1;
               }
           );
@@ -494,7 +484,7 @@ $(document).ready(function(){
       */
       if (arrNotPresentLetters.length > 0)
       {
-      console.log("Removing present and correct letters from non-present letters")
+        console.log("Removing present and correct letters from non-present letters")
         //remove present letters from the not-present letters
         arrPresentLettersSet = new Set(arrPresentLetters);
         arrCorrectLettersSet = new Set(arrCorrectLetters);
@@ -502,7 +492,8 @@ $(document).ready(function(){
         arrNotPresentLetters = arrNotPresentLetters.filter( (x) => {
           return !arrPresentAndCorrectLettersSet.has(x);
         });
-      console.log('not-present letters after removing present and correct letters: ' + arrNotPresentLetters.join(","));
+     
+        console.log('not-present letters after removing present and correct letters: ' + arrNotPresentLetters.join(","));
 
 
         console.log("Filtering for non-present letters")
@@ -537,28 +528,25 @@ $(document).ready(function(){
       //   not-present letters that are also marked as  present (arrNotPresentLetters contains any of arrPresentLetters)
       //   not-present letters that are also marked as correct  letters (arrNotPresentLetters contains any of arrCorrectLetters)
       //   differing correct letters in a single column (any arrCorrectSets  has length > 1)
-      errorText = "";
+      let errorText = "";
       for(var col=0; col<lettersPerWord; col++){
         if (arrCorrectSets[col].length > 1){
           if (checkArrayEqualElements(arrCorrectSets[col]) == false){
-          //errorColumn is only used to display the column number in the error message for a human. They normally like to see 1,2,3,4,5,6,7,8,9,10 when counting.
-          errorColumn = col + 1;
-          letterUsedAsCorrect = arrCorrectSets[col].slice(-1).toString().toUpperCase();
-          //The console log can be removed and was only used to format the error message for a human.
-          console.log("Problem: Different letters marked correct in column " + errorColumn + ". Using \"" + letterUsedAsCorrect + "\""); 
-          //This is the error message that is displayed to the user.
-          errorText += "Problem: Different letters marked correct in column " + errorColumn + ". Using \"" + letterUsedAsCorrect + "\" as it is lower." + "<br>";
+            //errorColumn is only used to display the column number in the error message for a human. They normally like to see 1,2,3,4,5,6,7,8,9,10 when counting.
+            errorColumn = col + 1;
+            letterUsedAsCorrect = arrCorrectSets[col].slice(-1).toString().toUpperCase();
+            //The console log can be removed and was only used to format the error message for a human.
+            console.log("Problem: Different letters marked correct in column " + errorColumn + ". Using \"" + letterUsedAsCorrect + "\""); 
+            //This is the error message that is displayed to the user.
+            errorText += "Problem: Different letters marked correct in column " + errorColumn + ". Using \"" + letterUsedAsCorrect + "\" as it is lower." + "<br>";
           }
         }
       }
 
 
-
-      
-
       //Display results
-      $("#status").html( "Found " + arrFilteredWords.length + " words:"  );
-      $("#wordlist").html( arrFilteredWords.join("<br>") );
+      //$("#status").html( "Found " + arrFilteredWords.length + " words:"  );
+      $("#wordlist").html( "<h2>Found " + arrFilteredWords.length + " words...</h2>" + arrFilteredWords.join("<br>") );
       $("#problems").html( errorText );
     }
 

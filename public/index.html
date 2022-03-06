@@ -14,18 +14,24 @@
   <body>
     
     <div id="header">
-      <div id="title">Wordle Helper</div>
-      <div id="languageselectcontainer">
-        <a href="#" id="resetLink">reset</a>
-        <select id="languageselect">
-          <option value="english">English</option>
-          <option value="spanish">Spanish</option>
-        </select>
-        
-  
+      <div id="header_left">
+        <div id="title">Wordle Helper</div>
       </div>
+      <div id="header_right">
+        <div id="languageselectcontainer">
+          <select id="languageselect">
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+          </select>
+        </div>
+        <div id="buttonscontainer">
+          <img src="img/reset.png" alt="Reset" title="Reset" id="resetLink">
+        </div>
+  
 
+      </div>
     </div>
+
     <div id="instructioncontainer">
       <div id="instructionstitle">Instructions ▾</div>
       <div id="instructions">
@@ -41,27 +47,21 @@
       </div>
     </div>
     
-    <div id="problems"></div>
+    
 
-
-    <div class="contentcontainer">
-
-      <div id="gridcontainer">
-        <div id="grid"></div>
-      </div>
-      
-      <div id="wordlistcontainer">
-        <div id="status">Word List</div>
+    <div id="wordlistcontainer">
+      <div id="wordlistscroll">
         <div id="wordlist"></div>
       </div>
-
     </div>
 
-   
-        <br><br><br>
-    
+    <div id="problems"></div>
 
-    
+    <div id="gridcontainer">
+      
+      <div id="grid"></div>
+    </div>
+      
 
     <div id="footer">
       <a href="https://droobilicious.isnow.online/2022/02/wordle-helper.html" target="_blank">info</a>
