@@ -4,3 +4,4 @@ A wordle helper for the [Wordle](https://www.powerlanguage.co.uk/wordle/) websit
 
 
 Give it a try [here](https://wordlehelper.jak.onl/) or [here](https://wordlehelper.isnow.online/)
+
