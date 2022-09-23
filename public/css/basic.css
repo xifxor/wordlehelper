@@ -13,6 +13,7 @@
       --color-empty: #ffffff;
       --color-empty-border: #d3d6da;
       --color-selected-border: #aaaaaa;
+      --grid-rows: 1;
     }
 
       html {
@@ -70,7 +71,15 @@
       cursor:pointer;
 
     }
+    #rowsselectorcontainer {
+      float:right;
+      vertical-align:middle;
+      height:2.7rem;
+      padding-top:9px;
+      padding-right:3px;
+      margin: auto;
 
+    }
     #languageselectcontainer {
       float:right;
       vertical-align:middle;
@@ -117,7 +126,7 @@
 
     #grid {   
       display: grid;
-      grid: repeat(6, 62px) / auto-flow 62px;
+      grid: repeat(var(--grid-rows), 62px) / auto-flow 62px;
       grid-gap: 5px;
  
       font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;

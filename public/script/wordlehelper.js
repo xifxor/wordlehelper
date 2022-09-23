@@ -38,6 +38,10 @@ $(document).ready(function(){
     let wordRows = 6;
     let defaultWordListMessage = "<h2>Word list...</h2>";
 
+    // Set grid size based on wordRows variable
+    const grid = document.getElementById("grid");
+    grid.style.setProperty('--grid-rows', wordRows)
+    
     
     //set default wordlist message
     $('#wordlist').html( defaultWordListMessage );
